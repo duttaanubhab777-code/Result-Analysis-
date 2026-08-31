@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Analysis Form</title>
+
+    <style>
+        /* ১. বডির ব্যাকগ্রাউন্ড এবং অ্যানিমেশন সেটআপ */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        /* ২. অ্যানিমেশনের নিয়ম (Keyframes) */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ৩. গ্লাস ইফেক্ট (Glassmorphism) এবং 3D সেটআপ */
+        .glass-box {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 15px;
+            
+            /* কাঁচের মতো স্বচ্ছ করার কোড */
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            
+            /* 3D এর জন্য নতুন কোড */
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            transform-style: preserve-3d;
+        }
+
+        /* মাউস হোভার (Hover) করলে 3D তে ভাসবে */
+        .glass-box:hover {
+            transform: perspective(1000px) rotateX(4deg) rotateY(-4deg) translateY(-10px); 
+            box-shadow: -15px 25px 45px rgba(0, 0, 0, 0.4); 
+        }
+
+        /* ৪. ইনপুট বক্সগুলো যাতে কাঁচের সাথে মানানসই হয় */
+        input[type="text"], input[type="number"], select, textarea {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            padding: 8px;
+            outline: none;
+            transition: 0.3s ease;
+        }
+
+        /* ইনপুটে ক্লিক করলে বর্ডার কালার চেঞ্জ হবে */
+        input:focus, select:focus, textarea:focus {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ff8800;
+        }
+
+        /* ৫. সাবমিট বাটনের হোভার ইফেক্ট */
+        button[type="submit"] {
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #cc6d00 !important;
+            transform: translateY(-2px);
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- গ্লাস বক্স এখান থেকে শুরু -->
+    <div class="glass-box">
+        
+        <div style="text-align: center;">
+            <h2 style="color: green;"><i>RESULT ANALYSIS</i></h2>
+            <h6 style="color: red;"><i>{for Science stream students only!!}</i></h6>
+        </div>
+
+        <form id="marksForm" onsubmit="sendData(event)">
+            
+            <div style="text-align: center;">
+                <label for="fullname">Your Name :-</label>
+                <input type="text" id="fullname" placeholder="Enter Your full Name" style="width: 80%;" required>
+                
+                <br><br>
+                <label>Your Class:-</label>
+                <label for="11">
+                    <input type="radio" value="ClassXI" name="Class" id="11" required>ClassXI
+                </label>
+                <label for="12">
+                    <input type="radio" value="ClassXII" name="Class" id="12">ClassXII
+                </label>
+                
+                <br><br>
+                <label>Select Your Board:-</label>
+                <select name="Boards" id="Boards" required>
+                    <option value="" disabled selected>-- Select Board --</option>
+                    <option value="WBCHSE">WBCHSE</option>
+                    <option value="ICSE">ICSE</option>
+                    <option value="CBSE">CBSE</option>
+                    <option value="Other State Board">Other State Board</option>
+                </select>
+                
+                <br><br>
+                <label><b style="color:#65ff00;">Marks:-</b></label>
+                <br><br>
+                
+                <label>Bengali:-</label>
+                <label for="Ben">
+                    <input type="number" id="Ben" placeholder="Marks obtained" required min="0" max="100" style="width: 180px; padding: 5px;" oninput="if(this.value > 100 || this.value < 0) { alert('Invalid! Please enter marks between 0 and 100.'); this.value = ''; }">
+                </label>
+                <br><br>
+                
+                <label>English:-</label>
+                <label for="Eng" id="">
+                    <input type="number" id="Eng" required placeholder="Marks obtained" min="0" max="100" style="width: 180px; padding: 5px;" oninput="if(this.value > 100 || this.value < 0) { alert('Invalid! Please enter marks between 0 and 100.'); this.value = ''; }">
+                </label>
+                <br><br>
+                
+                <label>Physics:-</label>
+                <label for="Phy">
+                    <input type="number" id="Phy" required placeholder="Marks obtained" min="0" max="100" style="width: 180px; padding: 5px;" oninput="if(this.value > 100 || this.value < 0) { alert('Invalid! Please enter marks between 0 and 100.'); this.value = ''; }">
+                </label>
+                <br><br>
+                
+                <label>Mathematics:-</label>
+                <label for="Math">
+                    <input type="number" id="Math" required placeholder="Marks obtained" min="0" max="100" style="width: 180px; padding: 5px;" oninput="if(this.value > 100 || this.value < 0) { alert('Invalid! Please enter marks between 0 and 100.'); this.value = ''; }">
+                </label>
+                <br><br>
+                
+                <label>Chemistry:-</label>
+                <label for="Chem">
+                    <input type="number" id="Chem" required placeholder="Marks obtained" min="0" max="100" style="width: 180px; padding: 5px;" oninput="if(this.value > 100 || this.value < 0) { alert('Invalid! Please enter marks between 0 and 100.'); this.value = ''; }">
+                </label>
+                <br><br>
+                
+                <label>Biology:-</label>
+                <label for="Bio">
+                    <input type="number" id="Bio" required placeholder="Marks obtained" min="0" max="100" style="width: 180px; padding: 5px;" oninput="if(this.value > 100 || this.value < 0) { alert('Invalid! Please enter marks between 0 and 100.'); this.value = ''; }">
+                </label>
+  <br>
+  <br>       
+  <div id="optionalSelect" style ="text-align: center">     
+                <label style="color:#fff100;">If you got the same marks in all subjects, which optional subject would you choose?</label>
+                <br><br>
+   <label for="p">
+                    <input type="radio" value="Physics" name="ops" id="p" required >Physics </label>
+                    <br><br>
+   <label for="c">
+                    <input type="radio" value="Chemistry" name="ops" id="c">Chemistry</label> 
+                    <br><br>
+   <label for="m">
+                    <input type="radio" value="Mathematics" name="ops" id="m">Mathematics </label>
+                    <br><br>
+   <label for="b">
+                    <input type="radio" value="Biology" name="ops" id="b">Biology </label>
+                    </div>       
+                <br><br>
+                
+                <label for="suggestion"><b>Suggestion Box:-</b></label><br>
+                <textarea id="suggestion" placeholder="Write your suggestions here..." rows="6" style="width: 90%; padding: 10px; border-radius: 10px; box-sizing: border-box;"></textarea>
+            </div>
+            
+            <br><br>
+            <div style="text-align: center;">
+                <button type="submit" style="background-color: #ff8800; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Submit</button>
+            </div>
+            
+            <br><br>
+            <div style="text-align: center;">
+                <h4 style="color: #ff0a00;">If your result is not good !</h4>
+                <h3 style="color: #00ffc0;">Don't worry</h3>
+                <h4 style="color: #65ff00;">Because</h4>
+                <label><b><i style="color: #0000b3;">It is never about End Result</i></b></label>
+                <br>
+                <label><b><i style="color: #b300a2;">It's always about journey</i></b></label>
+                <br><br>
+            </div>
+            
+            <p style="text-align: center; font-size: 13px; color: #f8ff00; font-weight: bold;">Created by Anubhab Dutta.</p>
+        </form>
+    </div>
+    <!-- গ্লাস বক্স এখানেই শেষ -->
+<script src="script.js"></script>
+    </body>
+</html>
+
+</body>
+</html>
