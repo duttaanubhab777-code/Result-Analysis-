@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel ="stylesheet" href="resultstyle.css">
+    <style>
+    /* যখন পেজটা প্রিন্ট বা পিডিএফ হবে, তখন এই বাটনটা লুকিয়ে যাবে */
+    @media print {
+        #downloadBtn {
+            display: none !important;
+        }
+    }
+</style>
+
+</head>
+<!-- পেজের উপরের অংশ: স্টুডেন্টের বেসিক ইনফরমেশন -->
+<div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+    <button id="downloadBtn" style="padding: 10px 20px; font-size: 16px; background-color: #ff9800; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+        Download Result
+    </button>
+</div>
+
+<div style="text-align: center; margin-bottom: 30px;">
+    <h1 style="color: #333;">RESULT ANALYSIS</h1>
+    <h3>Name: <span id="resName">Anubhab Dutta</span></h3>
+    <p><b>Class:</b> <span id="resClass">ClassXII</span> &nbsp;|&nbsp; <b>Board:</b> <span id="resBoard">WBCHSE</span></p>
+</div>
+
+<!-- ******************************************************* -->
+<!-- এখানে আপনার সেই 6-কলামের মেইন সাবজেক্টের টেবিলটা থাকবে -->
+<!-- ******************************************************* -->
+
+
+<div class="table-container">
+    
+ <table class="result-table">
+        
+        <!-- টেবিলের হেডিং (৬টি কলাম) -->
+        <thead>
+            <tr>
+                <th></th>
+                <th>Subject Name</th>
+                <th>Marks</th>
+                <th>Percentage</th>
+                <th>Grade</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+        
+        <!-- টেবিলের ডেটা -->
+        <tbody>
+            <!-- প্রথম Row -->
+            <tr>
+                <td>First Language</td>
+                <td>Bengali</td>
+                <td id="res-ben-marks">90</td>
+                <td id="res-ben-percent">90%</td>
+                <td id="res-ben-grade">AA</td>
+                <td id="res-ben-remarks">Pass</td>
+            </tr>
+            
+            <!-- দ্বিতীয় Row -->
+            <tr>
+                <td >Second Language</td>
+                <td>English</td>
+                <td id="res-eng-marks">76</td>
+                <td id="res-eng-percent">76%</td>
+                <td id="res-eng-grade">BB</td>
+                <td id="res-eng-remarks">Pass</td>
+            </tr>
+
+            <!-- তৃতীয় Row -->
+            <!-- Subject 1 এর Row -->
+<tr>
+    <td>Subject 1</td>
+    <td id="res-sub1-name"></td> <!-- নামটা জাভাস্ক্রিপ্ট বসাবে -->
+    <td id="res-sub1-marks"></td>
+    <td id="res-sub1-percent"></td>
+    <td id="res-sub1-grade"></td>
+    <td id="res-sub1-remarks"></td>
+</tr>
+
+<!-- Subject 2 এর Row -->
+<tr>
+    <td>Subject 2</td>
+    <td id="res-sub2-name"></td>
+    <td id="res-sub2-marks"></td>
+    <td id="res-sub2-percent"></td>
+    <td id="res-sub2-grade"></td>
+    <td id="res-sub2-remarks"></td>
+</tr>
+
+<!-- Subject 3 এর Row -->
+<tr>
+    <td>Subject 3</td>
+    <td id="res-sub3-name"></td>
+    <td id="res-sub3-marks"></td>
+    <td id="res-sub3-percent"></td>
+    <td id="res-sub3-grade"></td>
+    <td id="res-sub3-remarks"></td>
+</tr>
+
+<!-- Optional Subject এর Row -->
+<tr>
+    <td>Subject 4</td>
+    <td id="res-opt-name"></td>
+    <td id="res-opt-marks"></td>
+    <td id="res-opt-percent"></td>
+    <td id="res-opt-grade"></td>
+    <td id="res-opt-remarks"></td>
+</tr>
+                        
+          
+
+        </tbody>
+    </table>
+    </div>
+    
+    
+    <!-- পেজের নিচের অংশ: টোটাল মার্কস এবং পার্সেন্টেজের সামারি টেবিল -->
+<div class="table-container" style="margin-top: 30px; margin-bottom: 50px;">
+    <table class="summary-table">
+        <tbody>
+            <tr>
+                <th>Total Marks</th>
+                <td><span id="resTotalMarks">000</span> </td> 
+            </tr>
+            <tr>
+                <th>Overall Percentage</th>
+                <td><span id="resPercentage">00.0</span></td>
+            </tr>
+            <tr>
+                <th>Final Grade</th>
+                <td><span id="resFinalGrade">AA</span></td>
+            </tr>
+            <tr>
+                <th>Final Remarks</th>
+                <td><span id="resFinalRemarks">Pass</span></td>
+            </tr>
+            <tr>
+                <th>Final Optional Subject</th>
+                <!-- ফর্মে যেটা সিলেক্ট করেছিল, সেটা এখানে দেখাবে -->
+                <td><span id="resOptionalSub">Biology</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+<p style="text-align: center; font-size: 13px; color:#ed1a1a; font-weight: bold;">Created by Anubhab Dutta.</p></div>
+
+<div style="width: 300px; height: 300px; margin: 30px auto;">
+    <canvas id="myPieChart"></canvas>
+</div>
+
+<!-- সাবজেক্টের লম্বা প্রগ্রেস বার দেখানোর জায়গা -->
+<div id="subjectBars" style="width: 90%; max-width: 400px; margin: 30px auto; font-family: sans-serif;"></div>
+
+
+ <div style="text-align: center;">
+                <p style="color: #ff0a00;"><b>If your result is not good !</b></p>
+                <p style="color: #ed671a;"> <b>Don't worry</b></p>
+                <p style="color: #c61aed;"><b>Because</b></p>
+                <label><b><i style="color: #0000b3;">It is never about End Result</i></b></label>
+                <br>
+                <label><b><i style="color: #b300a2;">It's always about journey</i></b></label>
+                
+            
+            
+
+
+<p style="text-align: center; font-size: 13px; color:#1a1aed; font-weight: bold;">Created by Anubhab Dutta.</p></div>
+     
+     
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     
+    <script src="result.js"></script> 
+    
+  
+</body>
+</html>
